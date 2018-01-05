@@ -1,9 +1,18 @@
 var minerLogic = (function(){
     var mines=[];
     var app = document.getElementById("app");
+  
+    function isMine(elem){
+        mines.some(function(curentValue){
+            return curentValue === elem;
+        });
+    }
 
-    function  getRandomArbitrary(lenght){
-        return Math.floor(Math.random() * (lenght - 0) + 0);
+    function  getRandomArbitrary(elem){
+        if(isMine(elem)){
+            return Math.round(Math.random());
+        }
+        return 0;
     }
 
 
@@ -12,7 +21,7 @@ var minerLogic = (function(){
             this.style.backgroundColor = 'red';
             return;
         }
-        this.style.backgroundColor = 'blue';
+        this.style.backgroundColor = 'blue'; 
     };
     
     function tableDataContextMenuClickEvent(){
