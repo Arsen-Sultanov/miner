@@ -16,8 +16,8 @@ var minerLogic = (function(){
     }
 
 
-    function tableDataClickEvent(){
-        if(isMine(this)){
+    function tableDataClickEvent(el){
+        if(el.hasAttribute('value')){
             this.style.backgroundColor = 'red';
             return;
         }
