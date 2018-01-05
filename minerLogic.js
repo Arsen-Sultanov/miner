@@ -68,4 +68,4 @@ var minerLogic = (function(){
     addEventListenerForTable();
     addMines();
     
-})()sdsdasd
+})()
