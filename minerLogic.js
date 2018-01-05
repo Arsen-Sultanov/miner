@@ -28,16 +28,6 @@ var minerLogic = (function(){
         this.style.backgroundColor = 'green'        
     };
 
-
-    function isMine(TableData){
-        for(var isMineIteration = 0; isMineIteration < mines.length; isMineIteration++){       
-            if(TableData.id == mines[isMineIteration].id){
-                return true;
-            }
-        }
-    };
-
-
     function addMines(){
         var tableDatas = document.getElementsByTagName("td");
         tableDatas.forEach(function(curentValue){
