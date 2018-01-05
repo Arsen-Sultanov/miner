@@ -9,7 +9,7 @@ var minerLogic = (function(){
     }
 
     function  getRandomArbitrary(elem){
-        if(isMine(elem)){
+        if(!isMine(elem)){
             return Math.round(Math.random());
         }
         return 0;
@@ -40,11 +40,14 @@ var minerLogic = (function(){
 
     function addMines(){
         var tableDatas = document.getElementsByTagName("td");
-       for(var addMinesIteration = 0; addMinesIteration < 5; addMinesIteration++){
-        mines.push(
-            tableDatas[getRandomArbitrary(tableDatas.length)]
-        );
-       }
+        tableDatas.forEach(function(curentValue){
+            if(getRandomArbitrary(curentValue)){
+                tableDatas[curentValue].setAttribute('val', true);
+                return;
+            };
+            return;
+        });
+       
     }
 
 
