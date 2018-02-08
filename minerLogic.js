@@ -25,7 +25,7 @@ var minerLogic = (function(){
     };
     
     function tableDataContextMenuClickEvent(){
-        this.style.backgroundColor = 'green'        
+        this.className = 'td-open'        
     };
 
     function addMines(){
@@ -47,7 +47,7 @@ var minerLogic = (function(){
         for(var row = 0; row < size; row++){
             tmp += '<tr>';
             for(var colum = 0; colum < size; colum++){
-                tmp += '<td id="' + row + ':' + colum + '">'+ row + ':' + colum + '</th>'
+                tmp += '<td class="td-close" id="' + row + ':' + colum + '"> </td>'
             }
             tmp += '</tr>';
         }
@@ -68,4 +68,4 @@ var minerLogic = (function(){
     addEventListenerForTable();
     addMines();
     
-})()asdasdas
+})()

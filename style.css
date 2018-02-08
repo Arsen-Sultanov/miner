@@ -1,0 +1,16 @@
+table{
+    border: 5px outset #818181;
+    border-spacing: 0px 0px; 
+}
+.td-close{
+    border: 2px outset #cccccc ;
+    background-color: #c1c1c1;
+    width: 25px;
+    height: 25px;
+}
+.td-open{
+    border: 1px solid #000000 ;
+    background-color: #747474;
+    width: 25px;
+    height: 25px;
+}
