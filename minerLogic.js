@@ -1,32 +1,52 @@
 var minerLogic = (function(){
-    var mines=[];
     var app = document.getElementById("app");
-  
-    function isMine(elem){
-        mines.some(function(curentValue){
-            return curentValue === elem;
-        });
-    }
-
-    function  getRandomArbitrary(elem){
-        if(!isMine(elem)){
-            return Math.round(Math.random());
+    var trs;
+    var numbFlags = 0;
+    
+    
+    function openAll(){
+        removEventListenerForTable();
+        if(trs === undefined){trs = document.getElementsByTagName ('td');}   
+        for(var iter = 0; iter < trs.length; iter++){
+            if(trs[iter].className === 'td-flag' && trs[iter].hasAttribute('bomb') ){
+                continue;
+            }
+            else if(trs[iter].hasAttribute('bomb')){ 
+                trs[iter].className = 'td-open-mine'; 
+                continue;
+            }
+            trs[iter].className = 'td-open';
         }
-        return 0;
     }
 
+    function victory(){
 
+    }
+
+// Обработчики кликов
     function tableDataClickEvent(){
-        event.target.className = 'td-open'; 
+        if(event.target.tagName != 'TD' || event.target.className === 'td-flag') return;
+        else if(event.target.hasAttribute('bomb')){
+            event.target.className = 'td-open-mine';
+            openAll();
+            return;
+        } 
+        event.target.className = 'td-open';
     };
     
     function tableDataContextMenuClickEvent(event){
         event.preventDefault();
-        if(event.target.className === 'td-open'){
+        if(event.target.tagName != 'TD' || event.target.className === 'td-open') return;
+        else if(event.target.className === 'td-flag'){
+            event.target.className = 'td-close';
+            ++numbFlags;
             return;
         }
+        else if(numbFlags === 0){
+            return;
+        }
+        --numbFlags;
         event.target.className = 'td-flag'; 
-
     };
 
    
@@ -34,10 +54,10 @@ var minerLogic = (function(){
     function bombGenerator(bomb){
         var numberOfBombs = bomb || 5 ;
         return function(){
-           
-            if(numberOfBombs > 0 ){
+            if(Math.round(Math.random()) && numberOfBombs > 0 ){
                 if(Math.round(Math.random())){
                     --numberOfBombs;
+                    ++numbFlags;
                     return "bomb";
                     console.log(numberOfBombs);
                 }
@@ -65,9 +85,14 @@ var minerLogic = (function(){
 
 
     function addEventListenerForTable(){
-        var tableDatas = document.getElementsByTagName("table");
+        tableDatas = document.getElementsByTagName("table");
         tableDatas[0].addEventListener('click', tableDataClickEvent);
         tableDatas[0].addEventListener('contextmenu', tableDataContextMenuClickEvent);
+    }
+
+    function removEventListenerForTable(){
+        tableDatas[0].removeEventListener('click', tableDataClickEvent);
+        tableDatas[0].removeEventListener('contextmenu', tableDataContextMenuClickEvent);
     }
     
     app.appendChild(createTable(7));
