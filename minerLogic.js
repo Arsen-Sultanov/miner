@@ -16,38 +16,46 @@ var minerLogic = (function(){
     }
 
 
-    function tableDataClickEvent(el){
-        if(el.hasAttribute('value')){
-            this.style.backgroundColor = 'red';
-            return;
-        }
-        this.style.backgroundColor = 'blue'; 
+    function tableDataClickEvent(){
+        event.target.className = 'td-open'; 
     };
     
-    function tableDataContextMenuClickEvent(){
-        this.className = 'td-open'        
+    function tableDataContextMenuClickEvent(event){
+        event.preventDefault();
+        if(event.target.className === 'td-open'){
+            return;
+        }
+        event.target.className = 'td-flag'; 
+
     };
 
-    function addMines(){
-        var tableDatas = document.getElementsByTagName("td");
-        tableDatas.forEach(function(curentValue){
-            if(getRandomArbitrary(curentValue)){
-                tableDatas[curentValue].setAttribute('val', true);
+   
+//Генератор бомб 
+    function bombGenerator(bomb){
+        var numberOfBombs = bomb || 5 ;
+        return function(){
+           
+            if(numberOfBombs > 0 ){
+                if(Math.round(Math.random())){
+                    --numberOfBombs;
+                    return "bomb";
+                    console.log(numberOfBombs);
+                }
                 return;
-            };
+            }
             return;
-        });
-       
+        }
     }
 
 
     function createTable(size){
         var table = document.createElement('table');
         var tmp = "";
+        var bombs =  bombGenerator();
         for(var row = 0; row < size; row++){
             tmp += '<tr>';
             for(var colum = 0; colum < size; colum++){
-                tmp += '<td class="td-close" id="' + row + ':' + colum + '"> </td>'
+                tmp += '<td class="td-close" id="' + row + ':' + colum + ' " '+ bombs() +'> </td>'
             }
             tmp += '</tr>';
         }
@@ -57,15 +65,13 @@ var minerLogic = (function(){
 
 
     function addEventListenerForTable(){
-        var tableDatas = document.getElementsByTagName("td");
-        for(var tdIteration = 0; tdIteration < tableDatas.length; tdIteration++){
-            tableDatas[tdIteration].addEventListener('click', tableDataClickEvent);
-            tableDatas[tdIteration].addEventListener('contextmenu', tableDataContextMenuClickEvent);
-        };
+        var tableDatas = document.getElementsByTagName("table");
+        tableDatas[0].addEventListener('click', tableDataClickEvent);
+        tableDatas[0].addEventListener('contextmenu', tableDataContextMenuClickEvent);
     }
     
     app.appendChild(createTable(7));
     addEventListenerForTable();
-    addMines();
+   
     
-})()
+})()    

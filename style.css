@@ -3,7 +3,7 @@ table{
     border-spacing: 0px 0px; 
 }
 .td-close{
-    border: 2px outset #cccccc ;
+    border: 1px outset #cccccc ;
     background-color: #c1c1c1;
     width: 25px;
     height: 25px;
@@ -11,6 +11,14 @@ table{
 .td-open{
     border: 1px solid #000000 ;
     background-color: #747474;
+    width: 25px;
+    height: 25px;
+}
+.td-flag{
+    border: 1px outset #cccccc ;
+    background-color: #c1c1c1;
+    background-image: url("./rflag.png");
+    background-repeat: no-repeat;
     width: 25px;
     height: 25px;
 }
