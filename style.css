@@ -14,6 +14,14 @@ table{
     width: 25px;
     height: 25px;
 }
+.td-open-mine{
+    border: 1px solid #000000 ;
+    background-color: #747474;
+    background-image: url("./mine.png");
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+}
 .td-flag{
     border: 1px outset #cccccc ;
     background-color: #c1c1c1;
