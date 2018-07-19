@@ -24,12 +24,12 @@ var minerLogic = (function(){
     }
 
 // Обработчики кликов
-    function tableDataClickEvent(){
+    function tableDataClickEvent(event){
         if(event.target.tagName != 'TD' || event.target.className === 'td-flag') return;
         else if(event.target.hasAttribute('bomb')){
             event.target.className = 'td-open-mine';
             openAll();
-            return;
+            return 0;
         } 
         event.target.className = 'td-open';
     };
