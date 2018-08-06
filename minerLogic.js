@@ -1,4 +1,4 @@
-var minerLogic = (function(){
+window.onload = (function(){
     var app = document.getElementById("app");
     var trs;
     var numbFlags = 0;
@@ -8,6 +8,9 @@ var minerLogic = (function(){
         removEventListenerForTable();
         if(trs === undefined){trs = document.getElementsByTagName ('td');}   
         for(var iter = 0; iter < trs.length; iter++){
+            if(trs[iter].className === 'td-open-mine-death'){
+                continue;
+            }
             if(trs[iter].className === 'td-flag' && trs[iter].hasAttribute('bomb') ){
                 continue;
             }
@@ -19,17 +22,17 @@ var minerLogic = (function(){
         }
     }
 
-    function victory(){
+    // function victory(){
 
-    }
+    // }
 
 // Обработчики кликов
     function tableDataClickEvent(event){
         if(event.target.tagName != 'TD' || event.target.className === 'td-flag') return;
         else if(event.target.hasAttribute('bomb')){
-            event.target.className = 'td-open-mine';
+            event.target.className = 'td-open-mine-death';
             openAll();
-            return 0;
+            return;
         } 
         event.target.className = 'td-open';
     };
@@ -52,7 +55,7 @@ var minerLogic = (function(){
    
 //Генератор бомб 
     function bombGenerator(bomb){
-        var numberOfBombs = bomb || 5 ;
+        var numberOfBombs = Math.round((bomb * bomb)/4); 
         return function(){
             if(Math.round(Math.random()) && numberOfBombs > 0 ){
                 if(Math.round(Math.random())){
@@ -61,17 +64,17 @@ var minerLogic = (function(){
                     return "bomb";
                     console.log(numberOfBombs);
                 }
-                return;
+                return '';
             }
-            return;
+            return '';
         }
     }
 
 
     function createTable(size){
-        var table = document.createElement('table');
         var tmp = "";
-        var bombs =  bombGenerator();
+        var bombs =  bombGenerator(size);
+        var table = document.createElement('table');
         for(var row = 0; row < size; row++){
             tmp += '<tr>';
             for(var colum = 0; colum < size; colum++){
@@ -99,4 +102,4 @@ var minerLogic = (function(){
     addEventListenerForTable();
    
     
-})()    
+})();

@@ -1,6 +1,10 @@
+#app{
+    display: block; 
+}
 table{
     border: 5px outset #818181;
-    border-spacing: 0px 0px; 
+    border-spacing: 0px 0px;
+    margin: auto; 
 }
 .td-close{
     border: 1px outset #cccccc ;
@@ -21,6 +25,15 @@ table{
     background-repeat: no-repeat;
     width: 25px;
     height: 25px;
+}
+.td-open-mine-death{
+    border: 1px solid #000000 ;
+    background-color: #ff0000;
+    background-image: url("./mine.png");
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+    
 }
 .td-flag{
     border: 1px outset #cccccc ;
